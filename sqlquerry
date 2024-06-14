@@ -1,0 +1,48 @@
+CREATE TABLE netflix_titles (
+    show_id VARCHAR(50),
+    type VARCHAR(50),
+    title VARCHAR(255),
+    director VARCHAR(255),
+    cast TEXT,
+    country VARCHAR(100),
+    date_added VARCHAR(50),
+    release_year INT,
+    rating VARCHAR(50),
+    duration VARCHAR(50),
+    listed_in TEXT,
+    description TEXT
+);
+
+LOAD DATA INFILE 'C:/path/to/your/netflix_titles.csv'
+INTO TABLE netflix_titles
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(show_id, type, title, director, cast, country, date_added, release_year, rating, duration, listed_in, description);
+
+-- Count the total number of shows
+SELECT COUNT(*) FROM netflix_shows;
+
+-- Find the average release year of the shows
+SELECT AVG(release_year) AS average_release_year FROM netflix_shows;
+
+-- Find the most frequent genre
+SELECT listed_in, COUNT(*) as count FROM netflix_shows GROUP BY listed_in ORDER BY count DESC LIMIT 1;
+
+-- Find the top 5 shows in the United States by release year
+SELECT title, release_year FROM netflix_shows WHERE country = 'United States' ORDER BY release_year DESC LIMIT 5;
+
+-- Number of shows added each year
+SELECT release_year, COUNT(*) as shows_per_year FROM netflix_shows GROUP BY release_year ORDER BY release_year;
+
+SELECT release_year, COUNT(*) as shows_per_year FROM netflix_shows GROUP BY release_year ORDER BY release_year;
+
+SELECT listed_in, COUNT(*) as count FROM netflix_shows GROUP BY listed_in ORDER BY count DESC;
+
+SELECT title, release_year FROM netflix_shows WHERE country = 'United States' ORDER BY release_year DESC LIMIT 5;
+
+SELECT release_year, COUNT(*) as shows_per_year FROM netflix_shows GROUP BY release_year ORDER BY release_year;
+
+
+
